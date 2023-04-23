@@ -15,7 +15,7 @@ par.add_argument("-d", "--data_path", required=True,
                  type=str, help="Please enter data path")
 par.add_argument("-f", "--num_features", default=64, choices=[64, 256],
                  type=int, help="Set the feature size. (64/256)")
-par.add_argument("-t", "--types", default="semantic", choices=["real", "semantic_annotations"],
+par.add_argument("-t", "--types", default="real", choices=["real", "semantic_annotations"],
                  type=str, help="Choose a data type. (real/semantic_annotations)")
 par.add_argument("-i", "--iteration", default=5,
                  type=int, help="number of iteration")
