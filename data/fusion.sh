@@ -2,8 +2,8 @@
 
 export PYTHONPATH=.
 
-echo 'RICO test data extraction...'
-python test_data_extraction.py -d rico
+#echo 'RICO test data extraction...'
+#python test_data_extraction.py -d rico
 
 echo 'Data fusion...'
 TYPES=( "add" "cat" )
