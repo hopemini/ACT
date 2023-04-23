@@ -67,7 +67,7 @@ output
 The clustering result is evaluated by Purity, Normalized Mutual Information (NMI), and Adjusted Rand index (ARI).
 ```
 $ cd ../evaluation
-$ . ./evaluation.sh
+$ . ./evaluation_tree.sh
 ```
 
 output
