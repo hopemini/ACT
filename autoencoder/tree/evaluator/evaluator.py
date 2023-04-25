@@ -2,8 +2,9 @@ from __future__ import print_function, division
 
 import os
 import torch
-import torchtext
+#import torchtext
 import itertools
+import torchtext.legacy as torchtext
 
 from loss.loss import NLLLoss
 

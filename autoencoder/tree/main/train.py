@@ -5,8 +5,8 @@ import json
 
 import torch
 from torch.optim.lr_scheduler import StepLR
-#import torchtext.legacy as torchtext
-import torchtext
+import torchtext.legacy as torchtext
+#import torchtext
 
 from models.trainer import Trainer
 from models.seq2seq import Seq2seq

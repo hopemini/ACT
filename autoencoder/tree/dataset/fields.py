@@ -1,5 +1,5 @@
-#import torchtext.legacy as torchtext
-import torchtext
+import torchtext.legacy as torchtext
+#import torchtext
 
 class SourceField(torchtext.data.Field):
     def __init__(self, **kwargs):
