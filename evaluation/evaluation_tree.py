@@ -14,8 +14,11 @@ par.add_argument("-e", "--evaluation", default="nmi", choices=["purity", "nmi", 
 args = par.parse_args()
 
 clustering_algorithms = ['gaussian_mixture', 'kmeans']
-iteration = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+fusion_types = ["add", "cat"]
+weights = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"]
+iteration = 10
 class_num = ["23", "34"]
+conv_types = ["re"]
 with open('ground_truth_list.json', 'r') as f:
     ground_truth = json.load(f)
 
@@ -146,9 +149,48 @@ def run(data_name, c_num):
 
 if __name__ == "__main__":
     for c_num in class_num:
-        for _iter in iteration:
-            data_name = "tree_" + c_num + "_" + _iter
+        data_name = "rico_" + c_num
+        run(data_name, c_num)
+        for _iter in range(iteration):
+            data_name = "tree_" + c_num + "_" + str(_iter)
             run(data_name, c_num)
+            for c_type in conv_types:
+                data_name = "conv_" + c_type + "_" + c_num + "_" + str(_iter)
+                run(data_name, c_num)
+            for f_type in fusion_types:
+                data_name = "rico_" + c_num + "_tree_" + c_num + "_" + str(_iter) + "_" + f_type
+                run(data_name, c_num)
+#            for f_type in fusion_types:
+#                data_name = "conv_re_" + c_num + "_" + str(_iter) + "_conv_se_" + c_num + "_" + str(_iter) + "_" + f_type
+#                run(data_name, c_num)
+            for c_type in conv_types:
+                for f_type in fusion_types:
+                    data_name = ("rico_" + c_num + "_conv_" + c_type + "_" +
+                                 c_num + "_" + str(_iter) + "_" + f_type)
+                    run(data_name, c_num)
+                for f_type in fusion_types:
+                    data_name = ("tree_" + c_num + "_" + str(_iter) + "_conv_" + c_type + "_" +
+                                 c_num + "_" + str(_iter) + "_" + f_type)
+                    run(data_name, c_num)
+            for f_type in fusion_types:
+                for w in weights:
+                    data_name = "rico_" + c_num + "_tree_" + c_num + "_" + str(_iter) + "_" + f_type + "_" + w
+                    run(data_name, c_num)
+#            for f_type in fusion_types:
+#                for w in weights:
+#                    data_name = "conv_re_" + c_num + "_" + str(_iter) + "_conv_se_" + c_num + "_" + str(_iter) + "_" + f_type + "_" + w
+#                    run(data_name, c_num)
+            for c_type in conv_types:
+                for w in weights:
+                    for f_type in fusion_types:
+                        data_name = ("rico_" + c_num + "_conv_" + c_type + "_" +
+                                     c_num + "_" + str(_iter) + "_" + f_type + "_" + w)
+                        run(data_name, c_num)
+                    for f_type in fusion_types:
+                        data_name = ("tree_" + c_num + "_" + str(_iter) + "_conv_" + c_type + "_" +
+                                     c_num + "_" + str(_iter) + "_" + f_type + "_" + w)
+                        run(data_name, c_num)
+
 
     order_total_best_result = sorted(total_best_result.items(), reverse=True, key=lambda item: item[1])
 
