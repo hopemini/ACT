@@ -12,7 +12,7 @@ CLASSNUM=( "23" "34" )
 for n in ${CLASSNUM[@]}; do
     for i in ${ITERATION[@]}; do
         echo "tree_${n}_${i} clustering start"
-        python clustering.py -d tree_${n}_${i} -k ${CLASSNUM}
+        python clustering.py -d tree_${n}_${i} -k ${n}
     done
 done
 
